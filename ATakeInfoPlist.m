@@ -1,11 +1,3 @@
-//
-//  JXTakeInfoPlist.m
-//  JiaXiaoJiShiTong
-//
-//  Created by Jarvis.Tang on 13-12-5.
-//  Copyright (c) 2013年 . All rights reserved.
-//
-
 #import "ATakeInfoPlist.h"
 #import <sys/utsname.h>
 #import <CoreTelephony/CTTelephonyNetworkInfo.h>
