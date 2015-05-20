@@ -1,7 +1,7 @@
 
-#import "NSString+Tools.h"
+#import "NSString+ATools.h"
 
-@implementation NSString (Tools)
+@implementation NSString (ATools)
 
 +(BOOL) checkIsNullString:(NSString *)checkString
 {

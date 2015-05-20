@@ -1,7 +1,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface NSString (Tools)
+@interface NSString (ATools)
 /**
  *  判断字符串为空
  *
