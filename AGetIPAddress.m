@@ -1,18 +1,18 @@
 //
-//  GetIPAddress.m
+//  AGetIPAddress.m
 //  FamilySchoolPro
 //
 //  Created by 王力 on 15/5/8.
 //  Copyright (c) 2015年 wangli. All rights reserved.
 //
 
-#import "GetIPAddress.h"
+#import "AGetIPAddress.h"
 #import <sys/socket.h>
 #import <sys/sockio.h>
 #import <sys/ioctl.h>
 #import <net/if.h>
 #import <arpa/inet.h>
-@implementation GetIPAddress
+@implementation AGetIPAddress
 + (NSArray *)getIPAddress {
     int sockfd = socket(AF_INET, SOCK_DGRAM, 0);
     if (sockfd < 0) return nil;

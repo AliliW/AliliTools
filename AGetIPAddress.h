@@ -1,5 +1,5 @@
 //
-//  GetIPAddress.h
+//  AGetIPAddress.h
 //  FamilySchoolPro
 //
 //  Created by 王力 on 15/5/8.
@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface GetIPAddress : NSObject
+@interface AGetIPAddress : NSObject
 /**
  *  获取IP地址
  *
