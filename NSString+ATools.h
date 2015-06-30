@@ -27,6 +27,14 @@
  */
 +(BOOL) checkIsPhoneString:(NSString *) phone;
 /**
+ *  判断是否为邮箱
+ *
+ *  @param email 需要判断的邮箱
+ *
+ *  @return 为真则为邮箱，否则不是
+ */
++ (BOOL) validateEmail:(NSString *)email;
+/**
  *  判断两个字符串是否相等
  *
  *  @param _strString1 第一个需要判断的字符串
