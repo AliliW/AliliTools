@@ -5,7 +5,11 @@
 //  Created by 王力 on 15/7/24.
 //  Copyright © 2015年 王力. All rights reserved.
 //
-
+/**
+ *  使用该类必须首先集成AFNetworking
+ *
+ *  @return <#return value description#>
+ */
 #import <Foundation/Foundation.h>
 
 @interface ANetworkClient : NSObject
