@@ -8,6 +8,7 @@
 
 #import "ANetworkClient.h"
 #import "AFNetworking.h"
+#import "SVProgressHUD.h"
 @implementation ANetworkClient
 /**
  *  判读是否网络可达
@@ -48,16 +49,23 @@
  *  @param success   成功返回参数
  *  @param failure   失败返回参数
  */
-+(void) getRequestWithBaseUrl:(NSString *) baseUrl parameterDict:(NSDictionary *) parameter success:(void(^)(id object)) success failure:(void(^)(id object)) failure{
++(void) getRequestWithBaseUrl:(NSString *) baseUrl parameterDict:(NSDictionary *) parameter needPrompt:(BOOL) flag success:(void(^)(id object)) success failure:(void(^)(id object)) failure{
+    if (flag == YES) {
+        [SVProgressHUD show];
+    }
     [ANetworkClient isReaReachabilityCompletely:^(BOOL networkFlag) {
         if (networkFlag == YES) {
             AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
             [manager GET:baseUrl parameters:parameter success:^(AFHTTPRequestOperation *operation, id responseObject) {
                 success(responseObject);
+                [SVProgressHUD dismiss];
             } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                 failure(error);
+                [SVProgressHUD dismiss];
             }];
+            
         }else{
+            [SVProgressHUD dismiss];
             return ;
         }
     }];
@@ -71,16 +79,22 @@
  *  @param success   成功返回参数
  *  @param failure   失败返回参数
  */
-+(void) postRequestWithBaseUrl:(NSString *) baseUrl parameterDict:(NSDictionary *) parameter success:(void(^)(id object)) success failure:(void(^)(id object)) failure{
++(void) postRequestWithBaseUrl:(NSString *) baseUrl parameterDict:(NSDictionary *) parameter needPrompt:(BOOL) flag success:(void(^)(id object)) success failure:(void(^)(id object)) failure{
+    if (flag == YES) {
+        [SVProgressHUD show];
+    }
     [ANetworkClient isReaReachabilityCompletely:^(BOOL networkFlag) {
         if (networkFlag == YES) {
             AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
             [manager POST:baseUrl parameters:parameter success:^(AFHTTPRequestOperation *operation, id responseObject) {
                 success(responseObject);
+                [SVProgressHUD dismiss];
             } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                 failure(error);
+                [SVProgressHUD dismiss];
             }];
         }else{
+            [SVProgressHUD dismiss];
             return ;
         }
     }];
@@ -92,7 +106,10 @@
  *  @param success 下载成功文件存储路径
  *  @param failure 下载失败文件存储路径
  */
-+(void) downloadFileWithUrl:(NSString *) fileUrl success:(void(^)(NSURL *fileUrl)) success failure:(void(^)()) failure{
++(void) downloadFileWithUrl:(NSString *) fileUrl needPrompt:(BOOL) flag  success:(void(^)(NSURL *fileUrl)) success failure:(void(^)()) failure{
+    if (flag == YES) {
+        [SVProgressHUD show];
+    }
     [ANetworkClient isReaReachabilityCompletely:^(BOOL networkFlag) {
         if (networkFlag == YES) {
             NSURLSessionConfiguration *config = [NSURLSessionConfiguration defaultSessionConfiguration];
@@ -110,10 +127,12 @@
                 if (success) {
                     success(fileURL);
                 }
+                [SVProgressHUD dismiss];
                 return fileURL;
             } completionHandler:^(NSURLResponse *response, NSURL *filePath, NSError *error) {
                 if (failure) {
                     failure();
+                    [SVProgressHUD dismiss];
                 }
             }];
             [task resume];
@@ -132,7 +151,10 @@
  *  @param success    成功返回值
  *  @param failure    失败返回值
  */
-+(void) uploadFileWithUrl:(NSString *) addressUrl fileUrl:(NSURL *) fileUrl fileName:(NSString *) fileName fileType:(NSString *) fileType success:(void(^)(id object)) success failure:(void(^)()) failure{
++(void) uploadFileWithUrl:(NSString *) addressUrl fileUrl:(NSURL *) fileUrl fileName:(NSString *) fileName fileType:(NSString *) fileType needPrompt:(BOOL) flag success:(void(^)(id object)) success failure:(void(^)()) failure{
+    if (flag == YES) {
+        [SVProgressHUD show];
+    }
     [ANetworkClient isReaReachabilityCompletely:^(BOOL networkFlag) {
         if (networkFlag == YES) {
             AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
@@ -143,12 +165,15 @@
                 if (success) {
                     success(responseObject);
                 }
+                [SVProgressHUD dismiss];
             } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                 if (failure) {
                     failure();
                 }
+                [SVProgressHUD dismiss];
             }];
         }else{
+            [SVProgressHUD dismiss];
             return ;
         }
     }];
@@ -161,7 +186,10 @@
  *  @param success    成功返回值
  *  @param failure    失败返回值
  */
-+(void) uploadFileWithUrl:(NSString *) addressUrl fileUrl:(NSURL *) fileUrl success:(void(^)(id object)) success failure:(void(^)()) failure{
++(void) uploadFileWithUrl:(NSString *) addressUrl fileUrl:(NSURL *) fileUrl needPrompt:(BOOL) flag success:(void(^)(id object)) success failure:(void(^)()) failure{
+    if (flag == YES) {
+        [SVProgressHUD show];
+    }
     [ANetworkClient isReaReachabilityCompletely:^(BOOL networkFlag) {
         if (networkFlag == YES) {
             AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
@@ -177,16 +205,18 @@
                 if (success) {
                     success(responseObject);
                 }
+                [SVProgressHUD dismiss];
             } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                 NSLog(@"错误 %@", error.localizedDescription);
                 if (failure) {
                     failure();
                 }
+                [SVProgressHUD dismiss];
             }];
         }else{
+            [SVProgressHUD dismiss];
             return ;
         }
     }];
-    
 }
 @end
